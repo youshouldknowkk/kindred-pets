@@ -1,0 +1,75 @@
+{
+  "entities": {
+    "Pet": {
+      "title": "Pet",
+      "description": "宠物信息",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "breed": { "type": "string" },
+        "age": { "type": "number" },
+        "gender": { "type": "string", "enum": ["male", "female"] },
+        "size": { "type": "string", "enum": ["small", "medium", "large"] },
+        "description": { "type": "string" },
+        "images": { "type": "array", "items": { "type": "string" } },
+        "status": { "type": "string", "enum": ["available", "pending", "adopted"] },
+        "organizationId": { "type": "string" },
+        "healthInfo": {
+          "type": "object",
+          "properties": {
+            "vaccinated": { "type": "boolean" },
+            "dewormed": { "type": "boolean" },
+            "neutered": { "type": "boolean" },
+            "lastCheckup": { "type": "string", "format": "date" }
+          }
+        },
+        "tags": { "type": "array", "items": { "type": "string" } },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name", "breed", "status", "organizationId"]
+    },
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "用户信息",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "displayName": { "type": "string" },
+        "email": { "type": "string" },
+        "photoURL": { "type": "string" },
+        "role": { "type": "string", "enum": ["user", "admin", "org_admin"] }
+      },
+      "required": ["uid", "email", "role"]
+    },
+    "AdoptionApplication": {
+      "title": "AdoptionApplication",
+      "description": "领养申请",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "petId": { "type": "string" },
+        "status": { "type": "string", "enum": ["submitted", "reviewing", "approved", "rejected"] },
+        "submittedAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" },
+        "questionnaire": { "type": "object" }
+      },
+      "required": ["userId", "petId", "status"]
+    }
+  },
+  "firestore": {
+    "/pets/{petId}": {
+      "schema": "Pet",
+      "description": "宠物列表"
+    },
+    "/users/{uid}": {
+      "schema": "UserProfile",
+      "description": "用户资料"
+    },
+    "/applications/{appId}": {
+      "schema": "AdoptionApplication",
+      "description": "领养申请列表"
+    }
+  }
+}

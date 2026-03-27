@@ -1,0 +1,9 @@
+{
+  "name": "Kindred Pets (亲宠)",
+  "description": "一站式宠物领养与智慧养护平台，提供智能匹配、领养管理、救助联动及全方位宠物健康成长记录功能。",
+  "requestFramePermissions": [
+    "camera",
+    "microphone",
+    "geolocation"
+  ]
+}

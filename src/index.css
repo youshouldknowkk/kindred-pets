@@ -1,0 +1,59 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Be_Vietnam+Pro:wght@300;400;500;600&family=Noto+Sans+SC:wght@400;500;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-headline: "Plus Jakarta Sans", "Noto Sans SC", sans-serif;
+  --font-body: "Be Vietnam Pro", "Noto Sans SC", sans-serif;
+
+  --color-primary: #75552d;
+  --color-primary-dim: #684a22;
+  --color-on-primary: #fff0e3;
+  --color-primary-container: #fed39f;
+  
+  --color-secondary: #5b5d4a;
+  --color-secondary-container: #e4e4cc;
+  
+  --color-tertiary: #834b55;
+  --color-tertiary-container: #ffb6c1;
+  
+  --color-surface: #fcf5f0;
+  --color-surface-bright: #fcf5f0;
+  --color-surface-dim: #dbd3cd;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-container-low: #f7efea;
+  --color-surface-container: #eee7e1;
+  --color-surface-container-high: #e8e1db;
+  --color-surface-container-highest: #e3dbd6;
+  
+  --color-on-surface: #312e2b;
+  --color-on-surface-variant: #5f5b57;
+  --color-outline: #7a7672;
+  --color-outline-variant: #b2aca8;
+
+  --radius-lg: 2rem;
+  --radius-xl: 3rem;
+}
+
+@layer base {
+  body {
+    @apply bg-surface text-on-surface font-body;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-headline tracking-tight;
+  }
+}
+
+@layer components {
+  .frosted-glass {
+    @apply bg-white/60 backdrop-blur-xl border border-white/40;
+  }
+  
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}

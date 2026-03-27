@@ -1,0 +1,62 @@
+import { AdoptionStatus, Pet } from "@/src/types";
+
+export const MOCK_PETS: Pet[] = [
+  {
+    id: '1',
+    name: '库珀 (Cooper)',
+    breed: '金毛犬',
+    age: 3,
+    gender: 'male',
+    size: 'large',
+    description: '非常温顺友好的大金毛，喜欢户外运动和玩接球游戏。',
+    images: ['https://lh3.googleusercontent.com/aida-public/AB6AXuDTDFs13z-yBVnBUJ75xIp7UOgsbLxnob9GQ0gPcydDktEvenbwUK-Ksmm2VIp-vUTbT53eOWzKwi4tKFdU5XMfYCIjy6Qr74dnjEf_I25raRRFySRcXJO_u3BDsNapz3u_hyEHBDx0Dn34rIo5OV6B5bZ9wzEMGuuhp-lkCaJH5ydAIcRHmbZjUqmubZHfWghMi9WdBn3EZgreVPgMNOSe9tk31NXAx9xDjawOC7lvgFuymCq75dssGdzPRU6il7GVR_SSm_1LMf5Y'],
+    status: AdoptionStatus.AVAILABLE,
+    organizationId: 'org1',
+    healthInfo: {
+      vaccinated: true,
+      dewormed: true,
+      neutered: true,
+      lastCheckup: '2026-03-01',
+    },
+    tags: ['温顺', '活泼', '适合家庭'],
+    createdAt: '2026-01-15',
+  },
+  {
+    id: '2',
+    name: '露娜 (Luna)',
+    breed: '狸花猫',
+    age: 1,
+    gender: 'female',
+    size: 'small',
+    description: '活泼好动的小狸花，好奇心强，喜欢抓逗猫棒。',
+    images: ['https://lh3.googleusercontent.com/aida-public/AB6AXuCf3zGQq2EH-Tf4PbWUunxWySrzU0_K4r4HwLf-JyfiX4nwoXEXbt1w7v2XqQDm9UJB0WHhJJZ7PWHaW3nRM0p4pMHz5yaxXhoPz44RtBR8y0kEbvKuXcK1Q-ysTQUqCgEyJE3lOynQeq0gyylKJXXJGO-qdkpPySIZPUCBpyORtK2S-k0WeV0pHJq9kFSYohXZ7F6jB0ZQIdc0wbOgwLsGQBx1Jl4YVHmntlex5lFhSvGI46C_AzAimsg30OCy_VjcOh0lFNsE0G7c'],
+    status: AdoptionStatus.AVAILABLE,
+    organizationId: 'org1',
+    healthInfo: {
+      vaccinated: true,
+      dewormed: true,
+      neutered: false,
+    },
+    tags: ['好奇', '亲人'],
+    createdAt: '2026-02-20',
+  },
+  {
+    id: '3',
+    name: '糯米 (Mochi)',
+    breed: '柯基',
+    age: 2,
+    gender: 'female',
+    size: 'medium',
+    description: '短腿小可爱，性格开朗，是个十足的吃货。',
+    images: ['https://lh3.googleusercontent.com/aida-public/AB6AXuAr4Y6DmnPWaNwSrsU_j1Az5dq38hCoWV9Z2b9RlOSfoYOoFiHZKmMafwkmnCnJ9Qf2srFb7TIPyKfKvBpRUpbu3BmYE8iOUAIkpHgjC6ySEsja62eMu7kPp45MYVKSb5Mfvz88dYEJb9D1iLBYr6oWBbncf3OTtfpZHPXTvrIeizIysicLHrBsCA6HtCeBkZp2ndd1das1qL1tzZtw22tTVWU6n40uenf0rEV8Ac6YnS48JhonWPEb-51j7UUbCrNPdaqES41_j6OT'],
+    status: AdoptionStatus.AVAILABLE,
+    organizationId: 'org2',
+    healthInfo: {
+      vaccinated: true,
+      dewormed: true,
+      neutered: true,
+    },
+    tags: ['开朗', '吃货'],
+    createdAt: '2026-03-10',
+  }
+];

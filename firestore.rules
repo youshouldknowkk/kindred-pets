@@ -1,0 +1,87 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // ===============================================================
+    // Assumed Data Model
+    // ===============================================================
+    //
+    // Collection: users
+    // Document ID: {uid}
+    // Fields:
+    //   - uid: string (required)
+    //   - displayName: string (optional)
+    //   - email: string (required)
+    //   - photoURL: string (optional)
+    //   - role: string (required, enum: ['user', 'admin', 'org_admin'])
+    //
+    // Collection: pets
+    // Document ID: {petId}
+    // Fields:
+    //   - name: string (required)
+    //   - breed: string (required)
+    //   - status: string (required, enum: ['available', 'pending', 'adopted'])
+    //   - organizationId: string (required)
+    //   ...
+    //
+    // Collection: applications
+    // Document ID: {appId}
+    // Fields:
+    //   - userId: string (required)
+    //   - petId: string (required)
+    //   - status: string (required)
+    //
+    // ===============================================================
+
+    // ===============================================================
+    // Helper Functions
+    // ===============================================================
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+    
+    function isAdmin() {
+      return isAuthenticated() && 
+        (get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin' ||
+         (request.auth.token.email == "1955350250@qq.com" && request.auth.token.email_verified == true));
+    }
+
+    function isValidUser(data) {
+      return data.keys().hasAll(['uid', 'email', 'role']) &&
+             data.uid is string &&
+             data.email is string &&
+             data.role in ['user', 'admin', 'org_admin'];
+    }
+
+    function isValidPet(data) {
+      return data.keys().hasAll(['name', 'breed', 'status', 'organizationId']) &&
+             data.name is string && data.name.size() > 0 && data.name.size() < 100 &&
+             data.status in ['available', 'pending', 'adopted'];
+    }
+
+    // ===============================================================
+    // Rules
+    // ===============================================================
+
+    match /users/{uid} {
+      allow read: if isOwner(uid) || isAdmin();
+      allow create: if isAuthenticated() && isOwner(uid) && isValidUser(request.resource.data) && request.resource.data.role == 'user';
+      allow update: if isAuthenticated() && isOwner(uid) && isValidUser(request.resource.data) && request.resource.data.role == resource.data.role;
+    }
+
+    match /pets/{petId} {
+      allow read: if true; // Publicly readable for adoption
+      allow create, update, delete: if isAdmin();
+    }
+
+    match /applications/{appId} {
+      allow read: if isAuthenticated() && (request.auth.uid == resource.data.userId || isAdmin());
+      allow create: if isAuthenticated() && request.auth.uid == request.resource.data.userId;
+      allow update: if isAdmin();
+    }
+  }
+}
